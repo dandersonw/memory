@@ -7,3 +7,20 @@
     text-align: center;
 }
 
+.activeCell {
+    background-color: green;
+    border: green;
+}
+
+.completedCell {
+    background-color: gray;
+    border: gray;
+}
+
+.scoreDisplay {
+    text-align: center;
+}
+
+.restartButton {
+    text-align: center;
+}
