@@ -1,0 +1,16 @@
+[Unit]
+Description=Memory1
+After=network.target
+
+[Service]
+Type=simple
+User=phoenix
+WorkingDirectory=/home/phoenix/memory
+EnvironmentFile=/etc/default/memory1.env
+ExecStart=/home/phoenix/memory/_build/prod/rel/memory/bin/memory start
+ExecStop=/home/phoenix/memory/_build/prod/rel/memory/bin/memory stop
+Restart=on-failure
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
