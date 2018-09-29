@@ -1,0 +1,8 @@
+<script>
+  // taken from course notes
+  window.gameName = "<%= @game %>";
+</script>
+
+<div id="root">
+  React app loading...
+</div>

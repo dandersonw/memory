@@ -15,11 +15,9 @@ class Cell extends React.Component {
         }
     }
     
-
     render() {
         if (this.props.cell != "") {
-            let text = this.props.showLetter ? this.props.cell : "?";
-            return <button className="activeCell" onClick={this.do_click.bind(this)}>{text}</button>;
+            return <button className="activeCell" onClick={this.do_click.bind(this)}>{this.props.cell}</button>;
         } else {
             return <button className="completedCell"></button>;
         }

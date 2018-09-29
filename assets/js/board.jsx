@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import {Game, gridHeight, gridWidth} from './game';
+import {board_width, board_height} from './game';
 import {Cell} from './cell';
 
 
@@ -14,16 +14,14 @@ class Board extends React.Component {
     render() {
         //console.log(JSON.stringify(this.game.guesses));
         let rows = [];
-        for (let r = 0; r < gridHeight; r++) {
+        for (let r = 0; r < board_height(this.props.game); r++) {
             let columns = [];
-            for (let c = 0; c < gridWidth; c++) {
-                let visible = this.props.game.guesses.some((o) => o[0] == r && o[1] == c);
+            for (let c = 0; c < board_width(this.props.game); c++) {
                 //console.log(visible);
                 let cell = <Cell cell={this.props.game.cells[r][c]}
                                  clickHandler={this.props.clickHandler}
                                  r={r}
-                                 c={c}
-                                 showLetter={visible}>
+                                 c={c}>
                            </Cell>;
                 columns.push(<td key={c}>{cell}</td>);
             }

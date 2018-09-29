@@ -2,7 +2,7 @@ defmodule MemoryWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", MemoryWeb.RoomChannel
+  channel "games:*", MemoryWeb.GamesChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
