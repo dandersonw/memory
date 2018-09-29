@@ -2,11 +2,12 @@ defmodule MemoryWeb.GamesChannel do
   use MemoryWeb, :channel
 
   alias Memory.Game
+  alias Memory.BackupAgent
 
   # Changes taken from course notes
   def join("games:" <> name, payload, socket) do
     if authorized?(payload) do
-      game = Game.new()
+      game = Memory.BackupAgent.get(name) || Game.new()
       socket = socket
       |> assign(:name, name)
       |> assign(:game, game)
@@ -34,6 +35,7 @@ defmodule MemoryWeb.GamesChannel do
       {:ok, new_state} ->
         next_state = Game.maybe_resolve_guesses(new_state)
         socket = assign(socket, :game, next_state)
+        BackupAgent.put(socket.assigns[:name], socket.assigns[:game])
         {:reply, {:ok, %{ "game" => Game.client_view(new_state)}}, socket}
       :error ->
         {:reply, {:error, %{}}} # TODO: give reason for failure?
@@ -46,6 +48,7 @@ defmodule MemoryWeb.GamesChannel do
   
   def handle_in("restart", payload, socket) do
     socket = assign(socket, :game, Game.new())
+    BackupAgent.put(socket.assigns[:name], socket.assigns[:game])
     {:reply, {:ok, %{ "game" => Game.client_view(socket.assigns[:game])}}, socket}
   end
   
