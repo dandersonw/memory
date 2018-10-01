@@ -23,5 +23,5 @@ mix release
 
 echo "Starting app..."
 
-_build/prod/rel/memory/bin/memory foreground
+#_build/prod/rel/memory/bin/memory foreground
 
